@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux";
 import { Redirect } from "react-router";
-
+import useUser from "../../cutomHooks/useUser";
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const loggedIn = useSelector((state) => state.user.loggedIn);
-  return loggedIn ? <Component {...rest} /> : <Redirect to="/login" />;
+  const { user } = useUser();
+  return user.loggedIn ? <Component {...rest} /> : <Redirect to="/login" />;
 };
 
 export default ProtectedRoute;

@@ -2,6 +2,8 @@ import { useSpring } from "@react-spring/core";
 import { animated } from "@react-spring/web";
 import { useState } from "react";
 import Bubbles from "../animations/Bubbles";
+import LoginForm from "../components/Login/LoginForm";
+import SignupForm from "../components/Login/SignupForm";
 import useBreakPoints from "../cutomHooks/useBreakPoints";
 import useTheme from "../cutomHooks/useTheme";
 
@@ -20,6 +22,22 @@ const Login = () => {
     config: {
       mass: 3,
       tension: 300,
+    },
+  });
+  const LoginFormAnimation = useSpring({
+    to: {
+      position: "absolute",
+      display: selected === "Login" ? "block" : "none",
+      opacity: selected === "Login" ? 1 : 0,
+      y: selected === "Login" ? 0 : -10,
+    },
+  });
+  const SignupFormAnimation = useSpring({
+    to: {
+      position: "absolute",
+      display: selected === "Signup" ? "block" : "none",
+      opacity: selected === "Signup" ? 1 : 0,
+      y: selected === "Signup" ? 0 : -10,
     },
   });
 
@@ -61,14 +79,14 @@ const Login = () => {
         >
           <div className="w-full flex justify-end items-center px-10 relative mt-10">
             <p
-              className="mx-10 text-2xl font-bold"
+              className="mx-10 text-2xl font-bold cursor-pointer"
               style={{ color: theme.color3 }}
               onClick={() => setSelected("Login")}
             >
               Login
             </p>
             <p
-              className="mx-10 text-2xl font-bold"
+              className="mx-10 text-2xl font-bold cursor-pointer"
               style={{ color: theme.color3 }}
               onClick={() => setSelected("Signup")}
             >
@@ -78,6 +96,14 @@ const Login = () => {
               className="absolute"
               style={selectAnimation}
             ></animated.div>
+          </div>
+          <div className="flex-1 w-full relative">
+            <animated.div style={LoginFormAnimation} className="w-full h-full">
+              <LoginForm />
+            </animated.div>
+            <animated.div style={SignupFormAnimation} className="w-full h-full">
+              <SignupForm />
+            </animated.div>
           </div>
         </div>
       </div>
