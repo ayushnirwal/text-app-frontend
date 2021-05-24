@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
+import useBreakPoints from "../../cutomHooks/useBreakPoints";
 import useTheme from "../../cutomHooks/useTheme";
 import useUser from "../../cutomHooks/useUser";
 
 const SignupForm = () => {
   const { signup } = useUser();
+  const device = useBreakPoints();
   const { theme } = useTheme();
   const history = useHistory();
   const [username, setUsername] = useState("");
@@ -23,13 +25,21 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={submithandler}
-      className="w-full h-full flex flex-col items-end justify-center p-10"
+      className={`w-full h-full flex flex-col justify-center p-10 ${
+        device === "big-screen" || device === "small-screen"
+          ? "items-end"
+          : "items-center"
+      }`}
     >
       <input
         style={{ background: theme.color1, color: theme.color3 }}
         onChange={(e) => setUsername(e.target.value)}
         value={username}
-        className="w-7/12 h-14 px-6 rounded-xl focus:outline-none text-right text-xl my-4"
+        className={`${
+          device === "big-screen" || device === "small-screen"
+            ? "w-7/12 text-right"
+            : "w-10/12 text-center"
+        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
         type="text"
         placeholder="Username"
       />
@@ -37,7 +47,11 @@ const SignupForm = () => {
         style={{ background: theme.color1, color: theme.color3 }}
         onChange={(e) => setEmail(e.target.value)}
         value={email}
-        className="w-7/12 h-14 px-6 rounded-xl focus:outline-none text-right text-xl my-4"
+        className={`${
+          device === "big-screen" || device === "small-screen"
+            ? "w-7/12 text-right"
+            : "w-10/12 text-center"
+        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
         type="email"
         placeholder="Email"
         autoComplete="email"
@@ -46,7 +60,11 @@ const SignupForm = () => {
         style={{ background: theme.color1, color: theme.color3 }}
         onChange={(e) => setPassword(e.target.value)}
         value={password}
-        className="w-7/12 h-14 px-6 rounded-xl focus:outline-none text-right text-xl my-4"
+        className={`${
+          device === "big-screen" || device === "small-screen"
+            ? "w-7/12 text-right"
+            : "w-10/12 text-center"
+        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
         type="password"
         placeholder="Password"
         autoComplete="new-password"
@@ -55,7 +73,11 @@ const SignupForm = () => {
         style={{ background: theme.color1, color: theme.color3 }}
         onChange={(e) => setcPassword(e.target.value)}
         value={cpassword}
-        className="w-7/12 h-14 px-6 rounded-xl focus:outline-none text-right text-xl my-4"
+        className={`${
+          device === "big-screen" || device === "small-screen"
+            ? "w-7/12 text-right"
+            : "w-10/12 text-center"
+        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
         type="password"
         placeholder="Confirm Password"
         autoComplete="new-password"

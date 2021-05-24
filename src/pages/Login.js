@@ -11,17 +11,23 @@ const Login = () => {
   const device = useBreakPoints();
   const [selected, setSelected] = useState("Login");
   const { theme } = useTheme();
-  const selectAnimation = useSpring({
+
+  const LoginUnderlineAnimation = useSpring({
     to: {
-      width: selected === "Login" ? "5rem" : "5rem",
-      height: "0.2rem",
-      bottom: "-0.5rem",
-      right: selected === "Login" ? "14.5rem" : "5rem",
+      width: "65px",
+      height: "3px",
+      marginTop: "2px",
       backgroundColor: theme.color3,
+      opacity: selected === "Login" ? 1 : 0,
     },
-    config: {
-      mass: 3,
-      tension: 300,
+  });
+  const SignupUnderlineAnimation = useSpring({
+    to: {
+      width: "80px",
+      height: "3px",
+      marginTop: "2px",
+      backgroundColor: theme.color3,
+      opacity: selected === "Signup" ? 1 : 0,
     },
   });
   const LoginFormAnimation = useSpring({
@@ -77,25 +83,29 @@ const Login = () => {
           }`}
           style={{ backgroundColor: theme.color5 }}
         >
-          <div className="w-full flex justify-end items-center px-10 relative mt-10">
-            <p
+          <div
+            className={`w-full flex items-center px-10 relative mt-10 ${
+              device === "big-screen" || device === "small-screen"
+                ? "justify-end"
+                : "justify-center"
+            }`}
+          >
+            <div
               className="mx-10 text-2xl font-bold cursor-pointer"
               style={{ color: theme.color3 }}
               onClick={() => setSelected("Login")}
             >
               Login
-            </p>
-            <p
+              <animated.div style={LoginUnderlineAnimation}></animated.div>
+            </div>
+            <div
               className="mx-10 text-2xl font-bold cursor-pointer"
               style={{ color: theme.color3 }}
               onClick={() => setSelected("Signup")}
             >
               Signup
-            </p>
-            <animated.div
-              className="absolute"
-              style={selectAnimation}
-            ></animated.div>
+              <animated.div style={SignupUnderlineAnimation}></animated.div>
+            </div>
           </div>
           <div className="flex-1 w-full relative">
             <animated.div style={LoginFormAnimation} className="w-full h-full">
