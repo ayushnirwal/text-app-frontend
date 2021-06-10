@@ -50,7 +50,20 @@ const useUser = () => {
       console.log(error);
     }
   };
-  return { user, login, signup };
+  const logout = () => {
+    const userObj = {
+      id: null,
+      name: null,
+      email: null,
+      profilePicLink: "",
+      loggedIn: false,
+      token: "",
+      friends: [],
+      requests: [],
+    };
+    dispath(populateUser(userObj));
+  };
+  return { user, login, signup, logout };
 };
 
 export default useUser;

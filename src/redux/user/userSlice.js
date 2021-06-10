@@ -6,7 +6,6 @@ export const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     populateUser: (state, action) => {
-      console.log(action.payload);
       state.id = action.payload.id;
       state.email = action.payload.email;
       state.friends = action.payload.friends;
