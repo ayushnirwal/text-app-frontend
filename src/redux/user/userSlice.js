@@ -6,14 +6,26 @@ export const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     populateUser: (state, action) => {
-      state.id = action.payload.id;
-      state.email = action.payload.email;
-      state.friends = action.payload.friends;
-      state.loggedIn = action.payload.loggedIn;
-      state.name = action.payload.name;
-      state.avatarInd = action.payload.avatarInd;
-      state.requests = action.payload.requests;
-      state.token = action.payload.token;
+      const {
+        id,
+        email,
+        friends,
+        loggedIn,
+        name,
+        profilePicLink,
+        requests,
+        token,
+      } = action.payload;
+      Object.assign(state, {
+        id,
+        email,
+        friends,
+        loggedIn,
+        name,
+        profilePicLink,
+        requests,
+        token,
+      });
     },
     changeUserProfile: (state, action) => {
       state.name = action.payload.name;

@@ -1,11 +1,24 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import add_friend from "../../../assets/icons/add_friend.svg";
 import TextInput from "../TextInput/TextInput";
+import useFriends from "../../../cutomHooks/useFriends";
 
 const AddFriend = () => {
   const [expanded, setExpanded] = useState(false);
   const [friendEmail, setFriendEmail] = useState("");
+  const { sendRequest } = useFriends();
+  const fieldChangeHandler = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (e.key === "Enter") {
+        console.log(friendEmail);
+        setFriendEmail("");
+        sendRequest(friendEmail);
+      }
+    },
+    [friendEmail]
+  );
   const expandAnimation = useSpring({
     to: {
       width: expanded ? "100%" : "0%",
@@ -29,6 +42,7 @@ const AddFriend = () => {
       >
         <TextInput
           setValue={setFriendEmail}
+          onKeyUp={fieldChangeHandler}
           value={friendEmail}
           type="email"
           placeholder="Add Email"

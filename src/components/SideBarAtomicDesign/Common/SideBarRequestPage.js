@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { animated, useSpring } from "react-spring";
 import back_icon from "../../../assets/icons/back.svg";
-import RequestCard from "../../UI_atoms/RequestCard/RequestCard";
+import useFriends from "../../../cutomHooks/useFriends";
+import useTheme from "../../../cutomHooks/useTheme";
+import RequestCard, {
+  REQUEST_TYPES,
+} from "../../UI_atoms/RequestCard/RequestCard";
 import Selector from "../../UI_atoms/Selector/Selector";
 
 const SideBarRequestPage = ({ open, setSideBarPage }) => {
   const animation = useSpring({ to: { opacity: open ? 1 : 0 } });
+  const { requests, acceptRequest, rejectRequest, deleteRequest } =
+    useFriends();
+  const { theme } = useTheme();
   const [showRequestType, setShowRequestType] = useState("Sent"); // "Sent" or "Received"
   const back = () => {
     setSideBarPage("main");
@@ -30,6 +37,38 @@ const SideBarRequestPage = ({ open, setSideBarPage }) => {
       y: showRequestType === "Received" ? 0 : -10,
     },
   });
+
+  const requestsGeneratorByType = (
+    requests_list,
+    type = REQUEST_TYPES.SENT
+  ) => {
+    if (!requests_list || !requests_list.length)
+      return (
+        <div
+          className="w-full h-full bg-darkGray relative flex flex-col items-center justify-center md:rounded-lg "
+          style={{ color: theme.color3 }}
+        >
+          {`No ${type} requests.`}
+        </div>
+      );
+    return requests_list.map((request) => (
+      <div className="my-3">
+        <RequestCard
+          name={request.name}
+          email={request.email}
+          avatarInd={request.avatarInd}
+          type={type}
+          onAccept={() => acceptRequest(request.email)}
+          onReject={
+            type === REQUEST_TYPES.SENT
+              ? () => deleteRequest(request.email)
+              : () => rejectRequest(request.email)
+          }
+        />
+      </div>
+    ));
+  };
+
   return (
     <animated.div
       styles={animation}
@@ -48,34 +87,12 @@ const SideBarRequestPage = ({ open, setSideBarPage }) => {
       <div className="w-full h-4/6 relative mt-3">
         <animated.div style={sentAnimation}>
           <div className="w-full h-full overflow-scroll no-scroll-bar">
-            <div className="my-3">
-              <RequestCard type="sent" />
-            </div>
-            <div className="my-3">
-              <RequestCard type="sent" />
-            </div>
-            <div className="my-3">
-              <RequestCard type="sent" />
-            </div>
-            <div className="my-3">
-              <RequestCard type="sent" />
-            </div>
+            {requestsGeneratorByType(requests.sent, REQUEST_TYPES.SENT)}
           </div>
         </animated.div>
         <animated.div style={receivedAnimation}>
           <div className="w-full h-full overflow-scroll no-scroll-bar">
-            <div className="my-3">
-              <RequestCard type="received" />
-            </div>
-            <div className="my-3">
-              <RequestCard type="received" />
-            </div>
-            <div className="my-3">
-              <RequestCard type="received" />
-            </div>
-            <div className="my-3">
-              <RequestCard type="received" />
-            </div>
+            {requestsGeneratorByType(requests.received, REQUEST_TYPES.RECEIVED)}
           </div>
         </animated.div>
       </div>

@@ -7,8 +7,8 @@ const initialState = {
   token: null,
   friends: [],
   requests: {
-    sent_requests: [],
-    received_requests: [],
+    sent: [],
+    received: [],
   },
 };
 export default initialState;
