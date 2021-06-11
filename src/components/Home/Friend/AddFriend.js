@@ -1,13 +1,21 @@
 import { useSpring } from "@react-spring/core";
 import { animated } from "@react-spring/web";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import useTheme from "../../../cutomHooks/useTheme";
 import { IoAddCircleSharp, IoCloseCircle } from "react-icons/io5";
+import useFriends from "../../../cutomHooks/useFriends";
 
 const AddFriend = () => {
   const { theme } = useTheme();
   const [open, setOpen] = useState(false);
   const inputRef = useRef();
+  const { sendRequest, getPendingRequests } = useFriends();
+
+  const addFriend = (e) => {
+    e.preventDefault();
+    inputRef.value = '';
+    sendRequest({ email: inputRef.current.value })
+  };
 
   const animation = useSpring({
     to: {
@@ -35,16 +43,22 @@ const AddFriend = () => {
       className="flex items-center justify-center overflow-hidden"
     >
       <div className=" w-full h-full flex items-center justify-center overflow-hidden px-2">
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Add any user's email to send request"
-          className="focus:outline-none w-full h-full px-2"
-          style={{
-            backgroundColor: theme.color3,
-            opacity: open ? 1 : 0,
-          }}
-        />
+        <form onSubmit={addFriend}>
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Add any user's email to send request"
+            className="focus:outline-none w-full h-full px-2"
+            style={{
+              backgroundColor: theme.color3,
+              opacity: open ? 1 : 0,
+            }}
+          />
+          <input
+            type="submit"
+            className="hidden"
+          />
+        </form>
         <animated.div
           style={closeIconAnimation}
           onClick={() => (open ? setOpen(false) : "")}

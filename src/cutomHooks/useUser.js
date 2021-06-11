@@ -2,11 +2,21 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { populateUser } from "../redux/user/userSlice";
 
-const useUser = () => {
+const useUser = (fromHome = false) => {
   const user = useSelector((state) => state.user);
-  const dispath = useDispatch();
+  if (fromHome) console.log('FROM HOME', user);
+  const dispatch = useDispatch();
+  const getUserDetails = async () => {
+    const config = {
+      headers: {
+        authorization: `Bearer ${user.token}`,
+      },
+    }
+    const res = await axios.get("http://localhost:5000/api/userDetails", config);
+    dispatch(populateUser({ ...res.data, token: user.token, loggedIn: true }));
+  };
   const login = async (email, password) => {
-    let url = "http://localhost:5000" + "/api/signin";
+    let url = "http://localhost:5000/api/signin";
 
     try {
       const res = await axios.post(url, { email, password });
@@ -28,14 +38,14 @@ const useUser = () => {
             ? []
             : user.requests,
       };
-      dispath(populateUser(userObj));
+      dispatch(populateUser(userObj));
     } catch (error) {
       console.log(error);
     }
   };
 
   const signup = async (name, email, password, cpassword) => {
-    let url = "http://localhost:5000" + "/api/signup";
+    let url = "http://localhost:5000/api/signup";
 
     try {
       await axios.post(url, {
@@ -61,9 +71,9 @@ const useUser = () => {
       friends: [],
       requests: [],
     };
-    dispath(populateUser(userObj));
+    dispatch(populateUser(userObj));
   };
-  return { user, login, signup, logout };
+  return { user, login, signup, logout, getUserDetails };
 };
 
 export default useUser;

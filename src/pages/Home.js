@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useHistory } from "react-router";
 import Friends from "../components/Home/Friends";
 import Info from "../components/Home/Info";
@@ -8,28 +9,30 @@ import useUser from "../cutomHooks/useUser";
 const Home = () => {
   const device = useBreakPoints();
   const history = useHistory();
-  const { logout } = useUser();
+  const { logout, getUserDetails } = useUser();
   const { theme } = useTheme();
+  useEffect(() => {
+    console.log('HOME MOUNTED');
+    getUserDetails();
+    return () => console.log('HOME UNMOUNTED');
+  }, []);
   return (
     <div
-      className={`w-screen h-screen ${
-        device === "big-screen" || device === "small-screen" ? "p-10" : ""
-      }`}
+      className={`w-screen h-screen ${device === "big-screen" || device === "small-screen" ? "p-10" : ""
+        }`}
       style={{ backgroundColor: theme.color4 }}
     >
       <div
-        className={`w-full h-full  rounded-2xl grid ${
-          device === "big-screen" || device === "small-screen"
-            ? "grid-cols-12 grid-rows-6"
-            : "grid-cols-2 grid-rows-12"
-        }`}
+        className={`w-full h-full  rounded-2xl grid ${device === "big-screen" || device === "small-screen"
+          ? "grid-cols-12 grid-rows-6"
+          : "grid-cols-2 grid-rows-12"
+          }`}
       >
         <div
-          className={`w-full h-full flex flex-col overflow-hidden ${
-            device === "big-screen" || device === "small-screen"
-              ? "col-span-4 row-span-6 rounded-l-2xl"
-              : "hidden"
-          }`}
+          className={`w-full h-full flex flex-col overflow-hidden ${device === "big-screen" || device === "small-screen"
+            ? "col-span-4 row-span-6 rounded-l-2xl"
+            : "hidden"
+            }`}
           style={{ backgroundColor: theme.color1 }}
         >
           <div className="w-full h-2/6 ">
@@ -56,11 +59,10 @@ const Home = () => {
           </div>
         </div>
         <div
-          className={`w-full h-full flex justify-center items-center ${
-            device === "big-screen" || device === "small-screen"
-              ? "col-span-8 row-span-6 rounded-r-2xl"
-              : "col-span-12 row-span-6 "
-          }`}
+          className={`w-full h-full flex justify-center items-center ${device === "big-screen" || device === "small-screen"
+            ? "col-span-8 row-span-6 rounded-r-2xl"
+            : "col-span-12 row-span-6 "
+            }`}
           style={{ backgroundColor: theme.color5 }}
         ></div>
       </div>
