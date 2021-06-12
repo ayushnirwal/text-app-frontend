@@ -9,6 +9,20 @@ module.exports = {
         cream: "#FFDAB9",
         green: "#68A691",
       },
+      keyframes: {
+        appear: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+        disappear: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0 },
+        },
+      },
+      animation: {
+        appear: "appear 500ms ease-in-out",
+        disappear: "disappear 500ms ease-in-out",
+      },
     },
   },
   variants: {
