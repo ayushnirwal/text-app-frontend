@@ -41,7 +41,7 @@ const Login = () => {
           <Bubbles />
         </div>
         <div className="w-full h-full md:col-span-6 md:row-span-6 flex flex-col">
-          <div className="w-full mt-16 flex justify-center items-center md:justify-end">
+          <div className="w-full mt-16 md:mt-8 flex justify-center items-center md:justify-end">
             <Selector
               selected={selected}
               setSelected={setSelected}

@@ -7,6 +7,7 @@ import { animated, useSprings } from "react-spring";
 const Selector = ({ selected, setSelected, options }) => {
   const [optionAnimations, api] = useSprings(options.length || 0, (ind) => ({
     to: {
+      height: "2px",
       opacity: 0,
     },
   }));
@@ -26,19 +27,19 @@ const Selector = ({ selected, setSelected, options }) => {
       <div className="flex ">
         {options &&
           options.map((option, ind) => (
-            <div
+            <button
               key={option}
-              className="mx-10 "
+              className="mx-10 focus:outline-none"
               onClick={() => {
                 setSelected(option);
               }}
             >
-              <p className="font-bold text-cream md:text-2xl">{option}</p>
+              <p className="text-cream md:text-xl">{option}</p>
               <animated.div
                 style={optionAnimations[ind]}
-                className="bg-cream w-full h-1 mt-1"
+                className="bg-cream w-full mt-1"
               ></animated.div>
-            </div>
+            </button>
           ))}
       </div>
     </div>

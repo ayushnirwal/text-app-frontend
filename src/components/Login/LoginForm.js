@@ -25,9 +25,9 @@ const LoginForm = () => {
       onSubmit={submithandler}
       className="w-full h-full flex flex-col  items-center md:items-end justify-center md:pr-10"
     >
-      <div className="w-full md:h-full md:flex-1 flex flex-col justify-center items-center md:items-end">
+      <div className="w-full my-24 md:h-full md:flex-1 flex flex-col justify-center items-center md:items-end">
         <input
-          className="w-9/12 md:w-7/12 h-10 md:h-14 bg-cream rounded-full md:rounded-xl md:text-xl text-center text-darkGray my-3 md:my-6"
+          className="w-9/12 md:w-6/12 h-10 bg-cream rounded-full md:rounded-xl text-center text-darkGray my-3 md:my-3"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           type="email"
@@ -35,7 +35,7 @@ const LoginForm = () => {
           autoComplete="email"
         />
         <input
-          className="w-9/12 md:w-7/12 h-10 md:h-14 bg-cream rounded-full md:rounded-xl md:text-xl text-center text-darkGray my-3 md:my-6"
+          className="w-9/12 md:w-6/12 h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray my-3 md:my-3"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           type="password"
@@ -44,7 +44,7 @@ const LoginForm = () => {
         />
       </div>
       <input
-        className="my-24 md:my-10 md:text-xl bg-green text-darkGray font-bold px-14 py-2 md:px-6 md:py-3 rounded-full md:rounded-xl"
+        className="mb-24 md:mb-10 bg-green text-darkGray font-semibold px-14 py-2 md:px-4 md:py-1 rounded-full md:rounded-xl"
         type="submit"
         value="Login"
       />
