@@ -63,7 +63,7 @@ function Bubbles() {
         style={{
           width: "110%",
           height: "110%",
-          transform: "translate(0,-5%)",
+          transform: "translate(-5%,-5%)",
         }}
       >
         <g

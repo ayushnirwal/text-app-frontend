@@ -6,85 +6,47 @@ import useUser from "../../cutomHooks/useUser";
 
 const SignupForm = () => {
   const { signup } = useUser();
-  const device = useBreakPoints();
-  const { theme } = useTheme();
   const history = useHistory();
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setcPassword] = useState("");
   const submithandler = async (e) => {
     e.preventDefault();
-    try {
-      await signup(username, email, password, cpassword);
-      history.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(email, password, cpassword);
   };
   return (
     <form
       onSubmit={submithandler}
-      className={`w-full h-full flex flex-col justify-center p-10 ${
-        device === "big-screen" || device === "small-screen"
-          ? "items-end"
-          : "items-center"
-      }`}
+      className="w-full h-full flex flex-col  items-center md:items-end justify-center md:pr-10"
     >
+      <div className="w-full md:h-full md:flex-1 flex flex-col justify-center items-center md:items-end">
+        <input
+          className="w-9/12 md:w-7/12 h-10 md:h-14 bg-cream rounded-full md:rounded-xl md:text-xl text-center text-darkGray my-3 md:my-6"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          type="email"
+          placeholder="Email"
+          autoComplete="email"
+        />
+        <input
+          className="w-9/12 md:w-7/12 h-10 md:h-14 bg-cream rounded-full md:rounded-xl md:text-xl text-center text-darkGray my-3 md:my-6"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          type="password"
+          placeholder="Password"
+          autoComplete="current-password"
+        />
+        <input
+          className="w-9/12 md:w-7/12 h-10 md:h-14 bg-cream rounded-full md:rounded-xl md:text-xl text-center text-darkGray my-3 md:my-6"
+          onChange={(e) => setcPassword(e.target.value)}
+          value={cpassword}
+          type="password"
+          placeholder="Confirm Password"
+          autoComplete="current-password"
+        />
+      </div>
       <input
-        style={{ background: theme.color1, color: theme.color3 }}
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-        className={`${
-          device === "big-screen" || device === "small-screen"
-            ? "w-7/12 text-right"
-            : "w-10/12 text-center"
-        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
-        type="text"
-        placeholder="Username"
-      />
-      <input
-        style={{ background: theme.color1, color: theme.color3 }}
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-        className={`${
-          device === "big-screen" || device === "small-screen"
-            ? "w-7/12 text-right"
-            : "w-10/12 text-center"
-        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
-        type="email"
-        placeholder="Email"
-        autoComplete="email"
-      />
-      <input
-        style={{ background: theme.color1, color: theme.color3 }}
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        className={`${
-          device === "big-screen" || device === "small-screen"
-            ? "w-7/12 text-right"
-            : "w-10/12 text-center"
-        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
-        type="password"
-        placeholder="Password"
-        autoComplete="new-password"
-      />
-      <input
-        style={{ background: theme.color1, color: theme.color3 }}
-        onChange={(e) => setcPassword(e.target.value)}
-        value={cpassword}
-        className={`${
-          device === "big-screen" || device === "small-screen"
-            ? "w-7/12 text-right"
-            : "w-10/12 text-center"
-        } h-14 px-6 rounded-xl focus:outline-none  text-xl my-4`}
-        type="password"
-        placeholder="Confirm Password"
-        autoComplete="new-password"
-      />
-      <input
-        style={{ background: theme.color3, color: theme.color1 }}
-        className="px-6 py-2  rounded-xl focus:outline-none text-center text-xl my-4 font-bold"
+        className="my-24 md:my-10 md:text-xl bg-green text-darkGray font-bold px-14 py-2 md:px-6 md:py-3 rounded-full md:rounded-xl"
         type="submit"
         value="Signup"
       />
