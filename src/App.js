@@ -10,8 +10,8 @@ export default function App() {
     <Router>
       <Switch>
         <Route exact={true} path="/login" component={Login} />
-        <Route exact={true} path="/settings" component={Settings} />
-        <Route exact={true} path="/" component={Home} />
+        <ProtectedRoute exact={true} path="/settings" component={Settings} />
+        <ProtectedRoute exact={true} path="/" component={Home} />
       </Switch>
     </Router>
   );

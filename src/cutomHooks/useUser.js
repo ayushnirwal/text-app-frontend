@@ -30,7 +30,7 @@ const useUser = () => {
       };
       dispath(populateUser(userObj));
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
@@ -47,7 +47,7 @@ const useUser = () => {
 
       login(email, password);
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
   const logout = () => {

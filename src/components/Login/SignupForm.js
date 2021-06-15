@@ -10,18 +10,39 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setcPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const submithandler = async (e) => {
     e.preventDefault();
-    console.log(email, password, cpassword);
+    try {
+      await signup(email, password, cpassword);
+      history.push("/");
+    } catch (error) {
+      if (error.message.includes(400)) {
+        setErrorMsg("Email or password incorrect");
+      } else if (error.message.includes("Network Error")) {
+        setErrorMsg("It seems the server is down");
+      } else {
+        throw error;
+      }
+    }
   };
   return (
-    <form
-      onSubmit={submithandler}
-      className="w-full h-full flex flex-col  items-center justify-center md:pr-10"
-    >
-      <div className="w-full my-20 md:h-full md:flex-1 flex flex-col justify-center items-center">
+    <div className="w-full h-full flex flex-col items-center justify-start md:justify-center">
+      <div className="w-9/12 md:w-6/12 h-12 mt-36 md:mt-0 mb-3 ">
+        {errorMsg !== "" ? (
+          <div className=" w-full h-full rounded-full md:rounded-lg text-center text-red border-red border-2  py-2 animate-appear ">
+            {errorMsg}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+      <form
+        onSubmit={submithandler}
+        className=" w-9/12 md:w-6/12 flex flex-col items-center justify-center"
+      >
         <input
-          className="w-9/12 md:w-6/12 h-10 bg-cream rounded-full md:rounded-xl text-center text-darkGray my-3 md:my-3 focus:outline-none"
+          className="w-full h-10 bg-cream rounded-full md:rounded-xl text-center text-darkGrayfocus:outline-none  my-3 "
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           type="email"
@@ -29,7 +50,7 @@ const SignupForm = () => {
           autoComplete="email"
         />
         <input
-          className="w-9/12 md:w-6/12 h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray my-3 md:my-3 focus:outline-none"
+          className="w-full h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray  focus:outline-none  my-3 "
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           type="password"
@@ -37,20 +58,18 @@ const SignupForm = () => {
           autoComplete="new-password"
         />
         <input
-          className="w-9/12 md:w-6/12 h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray my-3 md:my-3 focus:outline-none"
-          onChange={(e) => setcPassword(e.target.value)}
+          className="w-full h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray  focus:outline-none  my-3 "
+          onChange={(e) => setPassword(e.target.value)}
           value={cpassword}
-          type="password"
           placeholder="Confirm Password"
-          autoComplete=""
         />
-      </div>
-      <input
-        className="mb-24 md:mb-10 bg-green text-darkGray font-semibold px-14 py-2 md:px-4 md:py-1 rounded-full md:rounded-xl focus:outline-none"
-        type="submit"
-        value="Signup"
-      />
-    </form>
+        <input
+          className="bg-green text-darkGray font-semibold px-14 py-2 md:px-4 md:py-1 rounded-full md:rounded-xl focus:outline-none  my-3 "
+          type="submit"
+          value="Signup"
+        />
+      </form>
+    </div>
   );
 };
 
