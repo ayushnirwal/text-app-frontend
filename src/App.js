@@ -11,7 +11,7 @@ export default function App() {
       <Switch>
         <Route exact={true} path="/login" component={Login} />
         <Route exact={true} path="/settings" component={Settings} />
-        <ProtectedRoute exact={true} path="/" component={Home} />
+        <Route exact={true} path="/" component={Home} />
       </Switch>
     </Router>
   );

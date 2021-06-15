@@ -23,9 +23,9 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={submithandler}
-      className="w-full h-full flex flex-col  items-center md:items-end justify-center md:pr-10"
+      className="w-full h-full flex flex-col  items-center justify-center md:pr-10"
     >
-      <div className="w-full my-24 md:h-full md:flex-1 flex flex-col justify-center items-center md:items-end">
+      <div className="w-full my-24 md:h-full md:flex-1 flex flex-col justify-center items-center ">
         <input
           className="w-9/12 md:w-6/12 h-10 bg-cream rounded-full md:rounded-xl text-center text-darkGray my-3 md:my-3 focus:outline-none"
           onChange={(e) => setEmail(e.target.value)}
