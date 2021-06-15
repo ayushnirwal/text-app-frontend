@@ -15,7 +15,7 @@ const SignupForm = () => {
     e.preventDefault();
     try {
       await signup(email, password, cpassword);
-      history.push("/");
+      history.push("/settings");
     } catch (error) {
       if (error.message.includes(400)) {
         setErrorMsg("Email or password incorrect");
@@ -64,7 +64,7 @@ const SignupForm = () => {
           placeholder="Confirm Password"
         />
         <input
-          className="bg-green text-darkGray font-semibold px-14 py-2 md:px-4 md:py-1 rounded-full md:rounded-xl focus:outline-none  my-3 "
+          className="bg-green text-darkGray font-semibold w-6/12 h-10 rounded-full md:rounded-xl focus:outline-none  my-3 "
           type="submit"
           value="Signup"
         />

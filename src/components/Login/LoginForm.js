@@ -61,7 +61,7 @@ const LoginForm = () => {
           autoComplete="current-password"
         />
         <input
-          className="bg-green text-darkGray font-semibold px-14 py-2 md:px-4 md:py-1 rounded-full md:rounded-xl focus:outline-none  my-3 "
+          className="bg-green text-darkGray font-semibold w-6/12 h-10 rounded-full md:rounded-xl focus:outline-none  my-3 "
           type="submit"
           value="Login"
         />

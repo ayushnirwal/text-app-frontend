@@ -1,6 +1,6 @@
 import { useSpring } from "@react-spring/core";
 import { animated } from "@react-spring/web";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Bubbles from "../animations/Bubbles";
 import Selector from "../components/Login/Selector";
 import LoginForm from "../components/Login/LoginForm";
@@ -10,6 +10,7 @@ import useTheme from "../cutomHooks/useTheme";
 
 const Login = () => {
   const device = useBreakPoints();
+
   const [selected, setSelected] = useState("Login");
   const { theme } = useTheme();
 

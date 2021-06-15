@@ -14,19 +14,19 @@ const Settings = () => {
         <div className="hidden md:block col-span-2 row-span-6 border-r-2 border-cream">
           <Bubbles />
         </div>
-        <div className="w-full h-full md:col-span-6 md:row-span-6  flex flex-col items-center justify-center py-10">
+        <div className="w-full md:col-span-6 md:row-span-6 flex flex-col items-center justify-start mt-24 md:mt-0 ">
           <AvatarSelector
             selectedAvatar={selectedAvatar}
             setSelectedAvatar={setSelectedAvatar}
           />
-          <form className=" w-full flex flex-col items-center justify-center ">
+          <form className="w-9/12 md:w-7/12  flex flex-col items-center justify-center mt-3 ">
             <input
-              className="w-9/12 md:w-7/12 h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray my-3 md:my-3 focus:outline-none"
+              className="w-full h-10 bg-cream rounded-full md:rounded-xl text-center text-darkGray my-2 focus:outline-none"
               placeholder="User Alias"
             />
 
             <input
-              className="mb-24 md:mb-10 bg-green text-darkGray font-semibold px-14 py-2 md:px-4 md:py-1 rounded-full md:rounded-xl focus:outline-none"
+              className="bg-green text-darkGray font-semibold w-6/12 h-10 rounded-full md:rounded-xl focus:outline-none my-2"
               type="submit"
               value="Apply Changes"
             />

@@ -18,8 +18,8 @@ const AvatarSelector = ({ selectedAvatar, setSelectedAvatar }) => {
     }));
   };
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      <div className="w-56 h-56 my-6 relative">
+    <div className="w-full flex flex-col items-center justify-center">
+      <div className="w-56 h-56 md:w-48 md:h-48 my-6 relative">
         <div className="w-full h-full absolute animate-appear bg-green rounded-full" />
         {avatarList &&
           avatarList.map((avatar, ind) => (
@@ -31,10 +31,10 @@ const AvatarSelector = ({ selectedAvatar, setSelectedAvatar }) => {
             />
           ))}
       </div>
-      <div className=" w-full flex items-center justify-center px-6">
+      <div className=" w-full flex items-center justify-center">
         {avatarList &&
           avatarList.map((avatar, ind) => (
-            <div key={ind} className="w-20 h-20 mx-2 ">
+            <div key={ind} className="w-16 h-16 mx-2 ">
               <img
                 className="w-full h-full"
                 src={avatar}
