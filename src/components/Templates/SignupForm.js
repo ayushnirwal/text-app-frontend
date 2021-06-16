@@ -43,28 +43,36 @@ const SignupForm = () => {
         onSubmit={submithandler}
         className=" w-9/12 md:w-6/12 flex flex-col items-center justify-center"
       >
-        <TextInput
-          setValue={setEmail}
-          value={email}
-          type="text"
-          placeholder="Email"
-          autoComplete="email"
-        />
-        <TextInput
-          setValue={setPassword}
-          value={password}
-          type="password"
-          placeholder="Password"
-          autoComplete="new-password"
-        />
-        <TextInput
-          setValue={setcPassword}
-          value={cpassword}
-          type="password"
-          placeholder="Confirm Password"
-        />
+        <div className="w-full h-10 my-3">
+          <TextInput
+            setValue={setEmail}
+            value={email}
+            type="text"
+            placeholder="Email"
+            autoComplete="email"
+          />
+        </div>
 
-        <Button onClick={submithandler}>Signup</Button>
+        <div className="w-full h-10 my-3">
+          <TextInput
+            setValue={setPassword}
+            value={password}
+            type="password"
+            placeholder="Password"
+            autoComplete="new-password"
+          />
+        </div>
+        <div className="w-full h-10 my-3">
+          <TextInput
+            setValue={setcPassword}
+            value={cpassword}
+            type="password"
+            placeholder="Confirm Password"
+          />
+        </div>
+        <div className="w-6/12 h-10 my-3">
+          <Button onClick={submithandler}>Signup</Button>
+        </div>
       </form>
     </div>
   );

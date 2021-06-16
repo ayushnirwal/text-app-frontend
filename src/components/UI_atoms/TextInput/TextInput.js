@@ -3,7 +3,7 @@ import React from "react";
 const TextInput = ({ setValue, value, type, placeholder, autoComplete }) => {
   return (
     <input
-      className="w-full h-10 bg-cream  rounded-full md:rounded-xl text-center text-darkGray focus:outline-none  my-3 "
+      className="w-full h-full bg-cream  rounded-full md:rounded-lg text-center text-darkGray focus:outline-none  "
       onChange={(e) => setValue(e.target.value)}
       value={value}
       type={type || ""}
