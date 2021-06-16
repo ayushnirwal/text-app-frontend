@@ -24,7 +24,7 @@ const Home = () => {
           <SideBar />
         </div>
         <div className="flex-1 px-5 pt-5 pb-20 md:p-0 md:col-span-9 md:row-span-6">
-          <ChatBox />
+          {/* <ChatBox /> */}
         </div>
       </div>
     </div>

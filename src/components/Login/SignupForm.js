@@ -3,6 +3,8 @@ import { useHistory } from "react-router";
 import useBreakPoints from "../../cutomHooks/useBreakPoints";
 import useTheme from "../../cutomHooks/useTheme";
 import useUser from "../../cutomHooks/useUser";
+import Button from "../UI_atoms/Button/Button";
+import TextInput from "../UI_atoms/TextInput/TextInput";
 
 const SignupForm = () => {
   const { signup } = useUser();
@@ -41,33 +43,28 @@ const SignupForm = () => {
         onSubmit={submithandler}
         className=" w-9/12 md:w-6/12 flex flex-col items-center justify-center"
       >
-        <input
-          className="w-full h-10 bg-cream rounded-full md:rounded-xl text-center text-darkGrayfocus:outline-none  my-3 "
-          onChange={(e) => setEmail(e.target.value)}
+        <TextInput
+          setValue={setEmail}
           value={email}
-          type="email"
+          type="text"
           placeholder="Email"
           autoComplete="email"
         />
-        <input
-          className="w-full h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray  focus:outline-none  my-3 "
-          onChange={(e) => setPassword(e.target.value)}
+        <TextInput
+          setValue={setPassword}
           value={password}
           type="password"
           placeholder="Password"
           autoComplete="new-password"
         />
-        <input
-          className="w-full h-10 bg-cream rounded-full md:rounded-xl  text-center text-darkGray  focus:outline-none  my-3 "
-          onChange={(e) => setPassword(e.target.value)}
+        <TextInput
+          setValue={setcPassword}
           value={cpassword}
+          type="password"
           placeholder="Confirm Password"
         />
-        <input
-          className="bg-green text-darkGray font-semibold w-6/12 h-10 rounded-full md:rounded-xl focus:outline-none  my-3 "
-          type="submit"
-          value="Signup"
-        />
+
+        <Button onClick={submithandler}>Signup</Button>
       </form>
     </div>
   );

@@ -1,10 +1,5 @@
 import { useSprings, animated } from "react-spring";
-import avatar1 from "../../assets/avatars/avatar1.svg";
-import avatar2 from "../../assets/avatars/avatar2.svg";
-import avatar3 from "../../assets/avatars/avatar3.svg";
-import avatar4 from "../../assets/avatars/avatar4.svg";
-
-const avatarList = [avatar1, avatar2, avatar3, avatar4];
+import { avatarList } from "../../utils/consts";
 const AvatarSelector = ({ selectedAvatar, setSelectedAvatar }) => {
   const [imageAnimations, api] = useSprings(avatarList.length, (ind) => ({
     to: {
