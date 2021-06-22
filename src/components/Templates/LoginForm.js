@@ -20,7 +20,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      //history.push("/");
+      history.push("/");
     } catch (error) {
       if (error.name === "inputError") {
         setErrorMsg(error.message);

@@ -1,18 +1,13 @@
 import { useSpring } from "@react-spring/core";
 import { animated } from "@react-spring/web";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Bubbles from "../animations/Bubbles";
 import Selector from "../components/UI_atoms/Selector/Selector";
 import LoginForm from "../components/Templates/LoginForm";
 import SignupForm from "../components/Templates/SignupForm";
-import useBreakPoints from "../cutomHooks/useBreakPoints";
-import useTheme from "../cutomHooks/useTheme";
 
 const Login = () => {
-  const device = useBreakPoints();
-
   const [selected, setSelected] = useState("Login");
-  const { theme } = useTheme();
 
   const loginFormAnimation = useSpring({
     to: {

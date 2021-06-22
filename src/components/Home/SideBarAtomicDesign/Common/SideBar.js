@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { animated, useSpring } from "react-spring";
-import close from "../../../assets/icons/close.svg";
-import SideBarMainPage from "./SideBarMainPage";
-import SideBarRequestPage from "./SideBarRequestPage";
+import close from "../../../../assets/icons/close.svg";
+import SideBarMainPage from "../Common/SideBarMainPage";
+import SideBarRequestPage from "../Common/SideBarRequestPage";
+
 const SideBar = ({ sideBarToggle }) => {
   const [sideBarPage, setSideBarPage] = useState("main");
   const mainAnimation = useSpring({
@@ -27,9 +28,9 @@ const SideBar = ({ sideBarToggle }) => {
   });
 
   return (
-    <div className="w-full h-full bg-darkGray relative flex flex-col items-center justify-center rounded-lg">
+    <div className="w-full h-full bg-darkGray relative flex flex-col items-center justify-center md:rounded-lg">
       <img
-        className="absolute w-8 h-8 left-2 top-2 z-10 md:hidden"
+        className="absolute w-8 h-8 right-6 top-6 z-10 md:hidden"
         src={close}
         onClick={sideBarToggle}
       />

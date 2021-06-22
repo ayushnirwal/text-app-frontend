@@ -11,14 +11,19 @@ export const userSlice = createSlice({
       state.friends = action.payload.friends;
       state.loggedIn = action.payload.loggedIn;
       state.name = action.payload.name;
-      state.profilePicLink = action.payload.profilePicLink;
+      state.avatarInd = action.payload.avatarInd;
       state.requests = action.payload.requests;
-      state.token = action.payload.token;
+      state.auth_token = action.payload.auth_token;
+      state.refresh_token = action.payload.refresh_token;
+    },
+    changeUserProfile: (state, action) => {
+      state.name = action.payload.name;
+      state.avatarInd = action.payload.avatarInd;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { populateUser } = userSlice.actions;
+export const { populateUser, changeUserProfile } = userSlice.actions;
 
 export default userSlice.reducer;

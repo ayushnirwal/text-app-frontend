@@ -2,9 +2,10 @@ const initialState = {
   id: null,
   name: null,
   email: null,
-  profilePicLink: null,
+  avatarInd: null,
   loggedIn: false,
-  token: null,
+  refresh_token: null,
+  auth_token: null,
   friends: [],
   requests: [],
 };

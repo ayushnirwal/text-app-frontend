@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Bubbles from "../animations/Bubbles";
 import useUser from "../cutomHooks/useUser";
 import AvatarSelector from "../components/Profile/AvatarSelector";

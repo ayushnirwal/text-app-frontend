@@ -19,8 +19,10 @@ const SignupForm = () => {
       await signup(email, password, cpassword);
       history.push("/settings");
     } catch (error) {
-      if (error.message.includes(400)) {
-        setErrorMsg("Email or password incorrect");
+      if (error.name === "inputError") {
+        setErrorMsg(error.message);
+      } else if (error.name === "requestError") {
+        setErrorMsg(error.message);
       } else if (error.message.includes("Network Error")) {
         setErrorMsg("It seems the server is down");
       } else {

@@ -1,4 +1,3 @@
-import { isRejected } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { populateUser } from "../redux/user/userSlice";
@@ -46,12 +45,28 @@ const useUser = () => {
     }
   };
 
-  const signup = async (name, email, password, cpassword) => {
+  const signup = async (email, password, cpassword) => {
     let url = "http://localhost:5000" + "/api/signup";
 
     try {
+      if (!email) {
+        throw { name: "inputError", message: "Email Required" };
+      }
+      if (!password) {
+        throw { name: "inputError", message: "Password Required" };
+      }
+      if (!cpassword) {
+        throw { name: "inputError", message: " Confirm Password Required" };
+      }
+
+      if (!cpassword === password) {
+        throw {
+          name: "inputError",
+          message: " Passworn and Confirm Password doesn't match ",
+        };
+      }
+
       await axios.post(url, {
-        name,
         email,
         password,
         password_confirmation: cpassword,
@@ -59,7 +74,12 @@ const useUser = () => {
 
       login(email, password);
     } catch (error) {
-      throw new Error(error);
+      if (error.response) {
+        if (error.response.status === 400) {
+          throw { name: "requestError", message: error.response.data.message };
+        }
+      }
+      throw error;
     }
   };
   const logout = () => {
