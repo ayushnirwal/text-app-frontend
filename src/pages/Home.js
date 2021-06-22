@@ -1,11 +1,11 @@
 import React from "react";
-import SideBar from "../components/Home/SideBarAtomicDesign";
+import SideBar from "../components/SideBarAtomicDesign";
 
 const Home = () => {
   return (
     <div className="w-screen h-screen bg-darkGray flex items-center justify-center">
-      <div className=" w-full h-full md:w-10/12 md:h-5/6 md:border-cream md:border-2 rounded-lg flex flex-col md:grid md:grid-cols-12 md:grid-rows-6 overflow-hidden">
-        <div className="col-span-3 row-span-6 ">
+      <div className=" w-full h-full md:w-10/12 md:h-5/6 md:border-cream md:border-2 md:rounded-lg flex flex-col md:grid md:grid-cols-12 md:grid-rows-6 overflow-hidden">
+        <div className="col-span-3 row-span-6 md:border-cream md:border-r-2 ">
           <SideBar />
         </div>
 

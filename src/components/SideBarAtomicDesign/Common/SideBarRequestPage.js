@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { animated, useSpring } from "react-spring";
-import back_icon from "../../../../assets/icons/back.svg";
+import back_icon from "../../../assets/icons/back.svg";
 import RequestCard from "../../UI_atoms/RequestCard/RequestCard";
 import Selector from "../../UI_atoms/Selector/Selector";
 

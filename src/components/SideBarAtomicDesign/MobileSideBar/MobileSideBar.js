@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { animated, useSpring } from "react-spring";
-import burger_menu from "../../../../assets/icons/burger_menu.svg";
+import burger_menu from "../../../assets/icons/burger_menu.svg";
 
 import SideBar from "../Common/SideBar";
 const MobileSideBar = () => {

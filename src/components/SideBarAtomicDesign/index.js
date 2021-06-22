@@ -1,4 +1,4 @@
-import useBreakPoints from "../../../cutomHooks/useBreakPoints";
+import useBreakPoints from "../../cutomHooks/useBreakPoints";
 import MobileSideBar from "./MobileSideBar/MobileSideBar";
 import DesktopSideBar from "./DesktopSideBar/DesktopSideBar";
 const SideBar = () => {

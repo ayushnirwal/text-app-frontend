@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { populateUser } from "../redux/user/userSlice";
+import { serverString } from "../utils/config";
 
 const useUser = () => {
   const user = useSelector((state) => state.user);
   const dispath = useDispatch();
   const login = async (email, password) => {
-    let url = "http://localhost:5000" + "/api/signin";
+    const url = serverString + "api/signin";
 
     try {
       if (!email) {
@@ -38,6 +39,7 @@ const useUser = () => {
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400) {
+          console.log(error.response.data);
           throw { name: "requestError", message: error.response.data.message };
         }
       }
@@ -46,7 +48,7 @@ const useUser = () => {
   };
 
   const signup = async (email, password, cpassword) => {
-    let url = "http://localhost:5000" + "/api/signup";
+    let url = serverString + "api/signup";
 
     try {
       if (!email) {

@@ -1,5 +1,5 @@
 import React from "react";
-import avatar1 from "../../../../assets/avatars/avatar1.svg";
+import avatar1 from "../../../assets/avatars/avatar1.svg";
 import useUser from "../../../cutomHooks/useUser";
 import HoldButton from "../../UI_atoms/HoldButton/HoldButton";
 

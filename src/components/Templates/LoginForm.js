@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
-import useBreakPoints from "../../cutomHooks/useBreakPoints";
-import useTheme from "../../cutomHooks/useTheme";
 import useUser from "../../cutomHooks/useUser";
 import Button from "../UI_atoms/Button/Button";
 import TextInput from "../UI_atoms/TextInput/TextInput";
 
 const LoginForm = () => {
-  const { theme } = useTheme();
-  const device = useBreakPoints();
   const history = useHistory();
   const { login } = useUser();
 

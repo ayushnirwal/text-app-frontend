@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { animated, useSpring } from "react-spring";
-import close from "../../../../assets/icons/close.svg";
-import SideBarMainPage from "../Common/SideBarMainPage";
-import SideBarRequestPage from "../Common/SideBarRequestPage";
+import close from "../../../assets/icons/close.svg";
+import SideBarMainPage from "./SideBarMainPage";
+import SideBarRequestPage from "./SideBarRequestPage";
 
-const SideBar = ({ caller, sideBarToggle }) => {
-  console.log(caller);
+const SideBar = ({ sideBarToggle }) => {
   const [sideBarPage, setSideBarPage] = useState("main");
   const mainAnimation = useSpring({
     to: {
