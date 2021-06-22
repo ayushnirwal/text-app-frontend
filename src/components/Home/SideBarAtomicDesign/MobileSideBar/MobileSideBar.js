@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { animated, useSpring } from "react-spring";
 import burger_menu from "../../../../assets/icons/burger_menu.svg";
 
-import SideBar from "../DesktopSideBar/DesktopSideBar";
+import SideBar from "../Common/SideBar";
 const MobileSideBar = () => {
   const [sideBarState, setSideBarState] = useState("close");
 
@@ -20,6 +20,7 @@ const MobileSideBar = () => {
     },
   });
   const sideBarToggle = () => {
+    console.log("toggle");
     switch (sideBarState) {
       case "open":
         setSideBarState("close");

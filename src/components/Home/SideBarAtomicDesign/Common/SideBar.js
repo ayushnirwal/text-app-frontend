@@ -4,7 +4,8 @@ import close from "../../../../assets/icons/close.svg";
 import SideBarMainPage from "../Common/SideBarMainPage";
 import SideBarRequestPage from "../Common/SideBarRequestPage";
 
-const SideBar = ({ sideBarToggle }) => {
+const SideBar = ({ caller, sideBarToggle }) => {
+  console.log(caller);
   const [sideBarPage, setSideBarPage] = useState("main");
   const mainAnimation = useSpring({
     to: {
@@ -32,7 +33,10 @@ const SideBar = ({ sideBarToggle }) => {
       <img
         className="absolute w-8 h-8 right-6 top-6 z-10 md:hidden"
         src={close}
-        onClick={sideBarToggle}
+        onClick={() => {
+          console.log(sideBarToggle);
+          sideBarToggle();
+        }}
       />
       <div className="w-full flex-1 relative ">
         <animated.div style={mainAnimation}>

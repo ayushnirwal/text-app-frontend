@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getBreakPoint } from "../utils/getBreakPoint";
 
 const useBreakPoints = () => {
@@ -6,7 +6,13 @@ const useBreakPoints = () => {
   const handler = (width) => {
     setDevice(getBreakPoint(window.innerWidth));
   };
-  window.addEventListener("resize", handler);
+  useEffect(() => {
+    window.addEventListener("resize", handler);
+    return () => {
+      window.removeEventListener("resize", handler);
+    };
+  });
+
   return device;
 };
 
