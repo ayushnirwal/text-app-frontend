@@ -3,7 +3,7 @@ import { avatarList } from "../../utils/consts";
 const AvatarSelector = ({ selectedAvatar, setSelectedAvatar }) => {
   const [imageAnimations, api] = useSprings(avatarList.length, (ind) => ({
     to: {
-      opacity: 0,
+      opacity: selectedAvatar === ind ? 1 : 0,
     },
   }));
   const changeSelectedAvatar = (ind) => {

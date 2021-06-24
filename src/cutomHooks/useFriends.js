@@ -2,7 +2,8 @@ import useUser from "./useUser";
 
 const useFriends = () => {
   const { user } = useUser();
-  const { friends, auth_token } = user;
+  const { friends, auth_token, requests } = user;
+  const { sent_requests, received_requests } = requests;
   //send rq
   const sendRequest = (email) => {
     console.log(process.env.SERVER_URL, email);
@@ -26,6 +27,8 @@ const useFriends = () => {
 
   return {
     friends,
+    sent_requests,
+    received_requests,
     sendRequest,
     delRequest,
     acceptRequest,

@@ -2,10 +2,11 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { populateUser } from "../redux/user/userSlice";
 import { serverString } from "../utils/config";
+import { isNill } from "../utils/helpers";
 
 const useUser = () => {
   const user = useSelector((state) => state.user);
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const login = async (email, password) => {
     const url = serverString + "api/signin";
 
@@ -19,23 +20,50 @@ const useUser = () => {
       const res = await axios.post(url, { email, password });
       const { token, user } = res.data;
 
+      let tmpRequests = null;
+
+      if (isNill(user.requests)) {
+        tmpRequests = {
+          sent_requests: [],
+          received_requests: [],
+        };
+      } else if (
+        isNill(user.requests.sent_requests) &&
+        !isNill(user.requests.received_requests)
+      ) {
+        tmpRequests = {
+          sent_requests: [],
+          received_requests: user.requests.received_requests,
+        };
+      } else if (
+        !isNill(user.requests.sent_requests) &&
+        isNill(user.requests.received_requests)
+      ) {
+        tmpRequests = {
+          sent_requests: user.requests.sent_requests,
+          received_requests: [],
+        };
+      } else {
+        tmpRequests = {
+          sent_requests: user.requests.sent_requests,
+          received_requests: user.requests.received_requests,
+        };
+      }
+
       const userObj = {
         id: user.id,
         name: user.name,
         email: user.email,
-        profilePicLink: user.profilePicLink,
+        avatarInd: user.avatarInd,
         loggedIn: true,
         token: token,
         friends:
           user.friends === undefined || user.friends === null
             ? []
             : user.friends,
-        requests:
-          user.requests === undefined || user.requests === null
-            ? []
-            : user.requests,
+        requests: tmpRequests,
       };
-      dispath(populateUser(userObj));
+      dispatch(populateUser(userObj));
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400) {
@@ -64,7 +92,7 @@ const useUser = () => {
       if (!cpassword === password) {
         throw {
           name: "inputError",
-          message: " Passworn and Confirm Password doesn't match ",
+          message: " Password and Confirm Password doesn't match ",
         };
       }
 
@@ -74,7 +102,7 @@ const useUser = () => {
         password_confirmation: cpassword,
       });
 
-      login(email, password);
+      await login(email, password);
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400) {
@@ -89,13 +117,13 @@ const useUser = () => {
       id: null,
       name: null,
       email: null,
-      profilePicLink: "",
+      avatarInd: null,
       loggedIn: false,
       token: "",
       friends: [],
-      requests: [],
+      requests: { sent_requests: [], received_requests: [] },
     };
-    dispath(populateUser(userObj));
+    dispatch(populateUser(userObj));
   };
   return { user, login, signup, logout };
 };

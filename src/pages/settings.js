@@ -1,12 +1,28 @@
 import { useState } from "react";
 import Bubbles from "../animations/Bubbles";
-import useUser from "../cutomHooks/useUser";
+import useProfile from "../cutomHooks/useProfile";
 import AvatarSelector from "../components/Profile/AvatarSelector";
+import { useHistory } from "react-router";
 
 const Settings = () => {
-  const { user } = useUser();
-  const avatarInd = user.profilePicLink;
-  const [selectedAvatar, setSelectedAvatar] = useState(avatarInd);
+  const history = useHistory();
+
+  const { profile, updateProfile } = useProfile();
+  console.log(profile);
+
+  const [selectedAvatar, setSelectedAvatar] = useState(profile.avatarInd);
+  const [name, setName] = useState(profile.name);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    //TBD: checks on name and selected avatar in updateProfile defination and show errors
+    try {
+      await updateProfile(selectedAvatar, name);
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="w-screen h-screen bg-darkGray grid grid-cols-3 grid-rows-6 md:grid-cols-12 md:grid-rows-6 ">
@@ -19,10 +35,17 @@ const Settings = () => {
             selectedAvatar={selectedAvatar}
             setSelectedAvatar={setSelectedAvatar}
           />
-          <form className="w-9/12 md:w-7/12  flex flex-col items-center justify-center mt-3 ">
+          <form
+            className="w-9/12 md:w-7/12  flex flex-col items-center justify-center mt-3 "
+            onSubmit={submitHandler}
+          >
             <input
               className="w-full h-10 bg-cream rounded-full md:rounded-xl text-center text-darkGray my-2 focus:outline-none"
               placeholder="User Alias"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
 
             <input

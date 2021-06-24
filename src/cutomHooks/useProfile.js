@@ -19,7 +19,7 @@ const useProfile = () => {
   const dispatch = useDispatch();
 
   const updateProfile = (avatarInd, name) => {
-    dispatch(changeUserProfile(avatarInd, name));
+    dispatch(changeUserProfile({ avatarInd, name }));
   };
   return { profile, updateProfile };
 };

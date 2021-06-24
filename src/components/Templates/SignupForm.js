@@ -17,6 +17,7 @@ const SignupForm = () => {
     e.preventDefault();
     try {
       await signup(email, password, cpassword);
+      console.log("to settings");
       history.push("/settings");
     } catch (error) {
       if (error.name === "inputError") {
