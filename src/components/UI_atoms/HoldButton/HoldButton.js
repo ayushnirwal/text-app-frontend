@@ -21,7 +21,7 @@ const HoldButton = ({
   });
   const onLongPressEnd = () => {
     setActive(false);
-    console.log("do it");
+
     onLongPress();
   };
 

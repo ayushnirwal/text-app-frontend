@@ -19,7 +19,6 @@ const AddFriend = () => {
     },
   });
   const toggleExpand = () => {
-    console.log("yo");
     setExpanded(!expanded);
   };
   return (

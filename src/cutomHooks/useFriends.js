@@ -5,25 +5,15 @@ const useFriends = () => {
   const { friends, auth_token, requests } = user;
   const { sent_requests, received_requests } = requests;
   //send rq
-  const sendRequest = (email) => {
-    console.log(process.env.SERVER_URL, email);
-  };
+  const sendRequest = (email) => {};
   //del rq
-  const delRequest = (email) => {
-    console.log(email);
-  };
+  const delRequest = (email) => {};
   //accecpt rq
-  const acceptRequest = (email) => {
-    console.log(email);
-  };
+  const acceptRequest = (email) => {};
   //reject rq
-  const rejectRequest = (email) => {
-    console.log(email);
-  };
+  const rejectRequest = (email) => {};
   //remove friend
-  const removeRequest = (email) => {
-    console.log(email);
-  };
+  const removeRequest = (email) => {};
 
   return {
     friends,

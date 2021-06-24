@@ -8,7 +8,6 @@ const Settings = () => {
   const history = useHistory();
 
   const { profile, updateProfile } = useProfile();
-  console.log(profile);
 
   const [selectedAvatar, setSelectedAvatar] = useState(profile.avatarInd);
   const [name, setName] = useState(profile.name);
@@ -19,9 +18,7 @@ const Settings = () => {
     try {
       await updateProfile(selectedAvatar, name);
       history.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

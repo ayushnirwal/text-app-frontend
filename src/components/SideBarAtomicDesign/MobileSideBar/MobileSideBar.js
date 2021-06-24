@@ -20,7 +20,6 @@ const MobileSideBar = () => {
     },
   });
   const sideBarToggle = () => {
-    console.log("toggle");
     switch (sideBarState) {
       case "open":
         setSideBarState("close");
