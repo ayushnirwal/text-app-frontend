@@ -63,6 +63,7 @@ const useUser = () => {
             : user.friends,
         requests: tmpRequests,
       };
+
       dispatch(populateUser(userObj));
     } catch (error) {
       if (error.response) {

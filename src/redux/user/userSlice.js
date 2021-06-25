@@ -13,8 +13,7 @@ export const userSlice = createSlice({
       state.name = action.payload.name;
       state.avatarInd = action.payload.avatarInd;
       state.requests = action.payload.requests;
-      state.auth_token = action.payload.auth_token;
-      state.refresh_token = action.payload.refresh_token;
+      state.token = action.payload.token;
     },
     changeUserProfile: (state, action) => {
       state.name = action.payload.name;

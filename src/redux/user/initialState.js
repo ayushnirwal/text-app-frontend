@@ -4,8 +4,7 @@ const initialState = {
   email: null,
   avatarInd: null,
   loggedIn: false,
-  refresh_token: null,
-  auth_token: null,
+  token: null,
   friends: [],
   requests: {
     sent_requests: [],

@@ -2,9 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserProfile } from "../redux/user/userSlice";
+import { serverString } from "../utils/config";
+import useUser from "./useUser";
 
 const useProfile = () => {
-  const user = useSelector((state) => state.user);
+  const { user, logout } = useUser();
+  const dispatch = useDispatch();
   const [profile, setProfile] = useState({
     avatarInd: user.avatarInd,
     name: user.name,
@@ -16,10 +19,22 @@ const useProfile = () => {
     });
   }, [user]);
 
-  const dispatch = useDispatch();
-
-  const updateProfile = (avatarInd, name) => {
-    dispatch(changeUserProfile({ avatarInd, name }));
+  const updateProfile = async (avatarInd, name) => {
+    try {
+      await axios.post(
+        serverString + "api/profileUpdate",
+        { avatarInd, name },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + user.token,
+          },
+        }
+      );
+      dispatch(changeUserProfile({ avatarInd, name }));
+    } catch (error) {
+      throw error;
+    }
   };
   return { profile, updateProfile };
 };
