@@ -33,7 +33,6 @@ const SideBar = ({ sideBarToggle }) => {
         className="absolute w-8 h-8 right-6 top-6 z-10 md:hidden"
         src={close}
         onClick={() => {
-          console.log(sideBarToggle);
           sideBarToggle();
         }}
       />

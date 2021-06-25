@@ -18,9 +18,7 @@ const Settings = () => {
     try {
       await updateProfile(selectedAvatar, name);
       history.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
