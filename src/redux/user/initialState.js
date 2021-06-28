@@ -1,14 +1,14 @@
 const initialState = {
-  id: null,
   name: null,
   email: null,
   avatarInd: null,
   loggedIn: false,
   token: null,
   friends: [],
+  selectedFriend: null,
   requests: {
-    sent_requests: [],
-    received_requests: [],
+    sent: [],
+    received: [],
   },
 };
 export default initialState;

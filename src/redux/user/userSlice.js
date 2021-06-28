@@ -6,7 +6,6 @@ export const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     populateUser: (state, action) => {
-      state.id = action.payload.id;
       state.email = action.payload.email;
       state.friends = action.payload.friends;
       state.loggedIn = action.payload.loggedIn;
@@ -19,10 +18,14 @@ export const userSlice = createSlice({
       state.name = action.payload.name;
       state.avatarInd = action.payload.avatarInd;
     },
+    setSelectedFriend: (state, action) => {
+      state.selectedFriend = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { populateUser, changeUserProfile } = userSlice.actions;
+export const { populateUser, changeUserProfile, setSelectedFriend } =
+  userSlice.actions;
 
 export default userSlice.reducer;

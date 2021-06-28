@@ -1,14 +1,16 @@
+import { serverString } from "../utils/config";
+import useFetchSWR from "./useFetchSWR";
 import useUser from "./useUser";
 
 const useFriends = () => {
   const { user } = useUser();
-  const { friends, auth_token, requests } = user;
-  const { sent_requests, received_requests } = requests;
+
+  const { friends } = user;
+
+  const { sent, received } = user.requests;
   //send rq
   const sendRequest = (email) => {};
-  //del rq
-  const delRequest = (email) => {};
-  //accecpt rq
+  //accept rq
   const acceptRequest = (email) => {};
   //reject rq
   const rejectRequest = (email) => {};
@@ -17,10 +19,9 @@ const useFriends = () => {
 
   return {
     friends,
-    sent_requests,
-    received_requests,
+    sent,
+    received,
     sendRequest,
-    delRequest,
     acceptRequest,
     rejectRequest,
     removeRequest,

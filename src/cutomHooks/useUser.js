@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { populateUser } from "../redux/user/userSlice";
+import { populateUser, setSelectedFriend } from "../redux/user/userSlice";
 import { serverString } from "../utils/config";
 import { isNill } from "../utils/helpers";
 
@@ -17,52 +17,15 @@ const useUser = () => {
       if (!password) {
         throw { name: "inputError", message: "Password Required" };
       }
-      const res = await axios.post(url, { email, password });
-      const { token, user } = res.data;
+      const loginRes = await axios.post(url, { email, password });
 
-      let tmpRequests = null;
+      const res = await axios.get(serverString + "api/userDetails", {
+        headers: { Authorization: "Bearer " + loginRes.data.token },
+      });
 
-      if (isNill(user.requests)) {
-        tmpRequests = {
-          sent_requests: [],
-          received_requests: [],
-        };
-      } else if (
-        isNill(user.requests.sent_requests) &&
-        !isNill(user.requests.received_requests)
-      ) {
-        tmpRequests = {
-          sent_requests: [],
-          received_requests: user.requests.received_requests,
-        };
-      } else if (
-        !isNill(user.requests.sent_requests) &&
-        isNill(user.requests.received_requests)
-      ) {
-        tmpRequests = {
-          sent_requests: user.requests.sent_requests,
-          received_requests: [],
-        };
-      } else {
-        tmpRequests = {
-          sent_requests: user.requests.sent_requests,
-          received_requests: user.requests.received_requests,
-        };
-      }
-
-      const userObj = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        avatarInd: user.avatarInd,
-        loggedIn: true,
-        token: token,
-        friends:
-          user.friends === undefined || user.friends === null
-            ? []
-            : user.friends,
-        requests: tmpRequests,
-      };
+      const userObj = res.data;
+      userObj.token = loginRes.data.token;
+      userObj.loggedIn = true;
 
       dispatch(populateUser(userObj));
     } catch (error) {
@@ -115,18 +78,30 @@ const useUser = () => {
   };
   const logout = () => {
     const userObj = {
-      id: null,
       name: null,
       email: null,
       avatarInd: null,
       loggedIn: false,
       token: "",
       friends: [],
-      requests: { sent_requests: [], received_requests: [] },
+      requests: { sent: [], received: [] },
     };
     dispatch(populateUser(userObj));
+    dispatch(setSelectedFriend(null));
   };
-  return { user, login, signup, logout };
+
+  const refresh = async () => {
+    const res = await axios.get(serverString + "api/userDetails", {
+      headers: { Authorization: "Bearer " + user.token },
+    });
+
+    const userObj = res.data;
+    userObj.token = user.token;
+    userObj.loggedIn = true;
+
+    dispatch(populateUser(userObj));
+  };
+  return { user, login, signup, logout, refresh };
 };
 
 export default useUser;
