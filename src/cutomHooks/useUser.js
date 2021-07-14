@@ -7,9 +7,19 @@ import { isNill } from "../utils/helpers";
 const useUser = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const login = async (email, password) => {
-    const url = serverString + "api/signin";
 
+  const getUserDetails = async () => {
+    console.log("GETTING USER DETAILS");
+    const config = {
+      headers: {
+        authorization: `Bearer ${user.token}`,
+      },
+    };
+    const res = await axios.get(`${serverString}/userDetails`, config);
+    dispatch(populateUser({ ...res.data, token: user.token, loggedIn: true }));
+  };
+
+  const login = async (email, password) => {
     try {
       if (!email) {
         throw { name: "inputError", message: "Email Required" };
@@ -17,36 +27,41 @@ const useUser = () => {
       if (!password) {
         throw { name: "inputError", message: "Password Required" };
       }
-      const res = await axios.post(url, { email, password });
-      const { token, user } = res.data;
+      console.log("making api call");
+      const res = await axios.post(`${serverString}/signin`, {
+        email,
+        password,
+      });
+      console.log("api call complete, data: ", res);
 
+      const { token, user } = res.data;
       let tmpRequests = null;
 
       if (isNill(user.requests)) {
         tmpRequests = {
-          sent_requests: [],
-          received_requests: [],
+          sent: [],
+          received: [],
         };
       } else if (
-        isNill(user.requests.sent_requests) &&
-        !isNill(user.requests.received_requests)
+        isNill(user.requests.sent) &&
+        !isNill(user.requests.received)
       ) {
         tmpRequests = {
-          sent_requests: [],
-          received_requests: user.requests.received_requests,
+          sent: [],
+          received: user.requests.received,
         };
       } else if (
-        !isNill(user.requests.sent_requests) &&
-        isNill(user.requests.received_requests)
+        !isNill(user.requests.sent) &&
+        isNill(user.requests.received)
       ) {
         tmpRequests = {
-          sent_requests: user.requests.sent_requests,
-          received_requests: [],
+          sent: user.requests.sent,
+          received: [],
         };
       } else {
         tmpRequests = {
-          sent_requests: user.requests.sent_requests,
-          received_requests: user.requests.received_requests,
+          sent: user.requests.sent,
+          received: user.requests.received,
         };
       }
 
@@ -63,7 +78,6 @@ const useUser = () => {
             : user.friends,
         requests: tmpRequests,
       };
-
       dispatch(populateUser(userObj));
     } catch (error) {
       if (error.response) {
@@ -77,8 +91,6 @@ const useUser = () => {
   };
 
   const signup = async (email, password, cpassword) => {
-    let url = serverString + "api/signup";
-
     try {
       if (!email) {
         throw { name: "inputError", message: "Email Required" };
@@ -97,7 +109,7 @@ const useUser = () => {
         };
       }
 
-      await axios.post(url, {
+      await axios.post(`${serverString}/signup`, {
         email,
         password,
         password_confirmation: cpassword,
@@ -122,11 +134,11 @@ const useUser = () => {
       loggedIn: false,
       token: "",
       friends: [],
-      requests: { sent_requests: [], received_requests: [] },
+      requests: { sent: [], received: [] },
     };
     dispatch(populateUser(userObj));
   };
-  return { user, login, signup, logout };
+  return { user, login, signup, logout, getUserDetails };
 };
 
 export default useUser;

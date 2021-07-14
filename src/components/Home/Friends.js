@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import useFriends from "../../cutomHooks/useFriends";
 import useTheme from "../../cutomHooks/useTheme";
 import AddFriend from "./Friend/AddFriend";
 
 const Friends = () => {
-  const { friends } = useFriends();
+  const { friends, requests, acceptRequest, rejectRequest, removeFriend } =
+    useFriends();
   const { theme } = useTheme();
 
   return (
@@ -19,10 +21,11 @@ const Friends = () => {
               className="w-full h-12 flex items-center justify-start px-4 my-1 rounded-lg"
               style={{ backgroundColor: theme.color3 }}
             >
-              <p>{friend.name}</p>
+              <p className="w-full">{friend.name}</p>
               <button
-                className="px-4 py-2 rounded-lg font-bold focus:outline-none ml-auto"
+                className="px-4 py-2 rounded-lg font-bold focus:outline-none mx-1 float-right"
                 style={{ backgroundColor: theme.color1, color: theme.color3 }}
+                onClick={() => removeFriend({ email: friend.email })}
               >
                 Remove
               </button>

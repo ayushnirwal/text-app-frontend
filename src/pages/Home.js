@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideBar from "../components/SideBarAtomicDesign";
+import useUser from "../cutomHooks/useUser";
 
 const Home = () => {
+  const { getUserDetails } = useUser();
+  useEffect(getUserDetails, []);
   return (
     <div className="w-screen h-screen bg-darkGray flex items-center justify-center">
       <div className=" w-full h-full md:w-10/12 md:h-5/6 md:border-cream md:border-2 md:rounded-lg flex flex-col md:grid md:grid-cols-12 md:grid-rows-6 overflow-hidden">
