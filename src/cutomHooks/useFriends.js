@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { populateUser } from "../redux/user/userSlice";
 import axios from "axios";
 import { serverString } from "../utils/config";
-let url = `${serverString}/api`;
 
 const useFriends = () => {
   const dispatch = useDispatch();
@@ -16,13 +15,21 @@ const useFriends = () => {
   };
 
   const sendRequest = async (email) => {
-    const res = await axios.post(`${url}/sendRequest`, { email }, config);
+    const res = await axios.post(
+      `${serverString}/sendRequest`,
+      { email },
+      config
+    );
     getUserDetails();
     return res;
   };
 
   const acceptRequest = async (email) => {
-    const res = await axios.post(`${url}/acceptRequest`, { email }, config);
+    const res = await axios.post(
+      `${serverString}/acceptRequest`,
+      { email },
+      config
+    );
     dispatch(
       populateUser({
         ...user,
@@ -33,26 +40,38 @@ const useFriends = () => {
   };
 
   const rejectRequest = async (email) => {
-    const res = await axios.post(`${url}/rejectRequest`, { email }, config);
+    const res = await axios.post(
+      `${serverString}/rejectRequest`,
+      { email },
+      config
+    );
     getUserDetails();
     return res;
   };
 
   const deleteRequest = async (email) => {
-    const res = await axios.post(`${url}/delRequest`, { email }, config);
+    const res = await axios.post(
+      `${serverString}/delRequest`,
+      { email },
+      config
+    );
     getUserDetails();
     return res;
   };
 
   const removeFriend = async (email) => {
     console.log("removing friend");
-    const res = await axios.post(`${url}/removeFriend`, { email }, config);
+    const res = await axios.post(
+      `${serverString}/removeFriend`,
+      { email },
+      config
+    );
     getUserDetails();
     return res;
   };
 
   const getPendingRequests = async () => {
-    const res = await axios.get(`${url}/requests`, config);
+    const res = await axios.get(`${serverString}/requests`, config);
     dispatch(
       populateUser({
         ...user,

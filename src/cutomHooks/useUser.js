@@ -5,9 +5,9 @@ import { serverString } from "../utils/config";
 import { isNill } from "../utils/helpers";
 
 const useUser = () => {
-  const url = `${serverString}/api`;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   const getUserDetails = async () => {
     console.log("GETTING USER DETAILS");
     const config = {
@@ -15,12 +15,11 @@ const useUser = () => {
         authorization: `Bearer ${user.token}`,
       },
     };
-    const res = await axios.get(`${url}/userDetails`, config);
+    const res = await axios.get(`${serverString}/userDetails`, config);
     dispatch(populateUser({ ...res.data, token: user.token, loggedIn: true }));
   };
-  const login = async (email, password) => {
-    let url = `${url}/signin`;
 
+  const login = async (email, password) => {
     try {
       if (!email) {
         throw { name: "inputError", message: "Email Required" };
@@ -29,7 +28,10 @@ const useUser = () => {
         throw { name: "inputError", message: "Password Required" };
       }
       console.log("making api call");
-      const res = await axios.post(url, { email, password });
+      const res = await axios.post(`${serverString}/signin`, {
+        email,
+        password,
+      });
       console.log("api call complete, data: ", res);
 
       const { token, user } = res.data;
@@ -89,8 +91,6 @@ const useUser = () => {
   };
 
   const signup = async (email, password, cpassword) => {
-    let url = serverString + "/api/signup";
-
     try {
       if (!email) {
         throw { name: "inputError", message: "Email Required" };
@@ -109,7 +109,7 @@ const useUser = () => {
         };
       }
 
-      await axios.post(url, {
+      await axios.post(`${serverString}/signup`, {
         email,
         password,
         password_confirmation: cpassword,

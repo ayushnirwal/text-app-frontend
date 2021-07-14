@@ -22,7 +22,8 @@ const useProfile = () => {
   const updateProfile = async (avatarInd, name) => {
     try {
       await axios.post(
-        serverString + "/api/profileUpdate",
+        `${serverString}/profileUpdate`,
+
         { avatarInd, name },
         {
           headers: {
